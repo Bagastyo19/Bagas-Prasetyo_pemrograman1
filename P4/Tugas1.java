@@ -6,6 +6,12 @@ public class Tugas1 {
         long[] laporanMingguan = new long[7];
         String[] namaHari = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"};
         
+        long totalSeminggu = 0;
+        long max = 0;
+        long min = Long.MAX_VALUE;
+        int idxMax = 0;
+        int idxMin = 0;
+
         System.out.println("=== Input Pengeluaran Mingguan ===");
 
         for (int i = 0; i < 7; i++) {
@@ -18,25 +24,17 @@ public class Tugas1 {
             long belanja = input.nextLong();
 
             laporanMingguan[i] = makan + transport + belanja;
-        }
-
-        long max = laporanMingguan[0];
-        long min = laporanMingguan[0];
-        String hariTerboros = namaHari[0];
-        String hariTerhemat = namaHari[0];
-        long totalSeminggu = 0;
-
-        for (int i = 0; i < 7; i++) {
             totalSeminggu += laporanMingguan[i];
 
-            if (laporanMingguan[i] > max) {
-                max = laporanMingguan[i];
-                hariTerboros = namaHari[i];
-            }
-            if (laporanMingguan[i] < min) {
-                min = laporanMingguan[i];
-                hariTerhemat = namaHari[i];
-            }
+            // Menggunakan Math.max/min untuk nilai
+            long prevMax = max;
+            long prevMin = min;
+            max = Math.max(max, laporanMingguan[i]);
+            min = Math.min(min, laporanMingguan[i]);
+
+            // Menggunakan Ternary Operator untuk update indeks (Tanpa keyword 'if')
+            idxMax = (laporanMingguan[i] >= max) ? i : idxMax;
+            idxMin = (laporanMingguan[i] <= min) ? i : idxMin;
         }
 
         System.out.println("\n======================================");
@@ -49,8 +47,8 @@ public class Tugas1 {
         System.out.printf("TOTAL SEMINGGU  : Rp%,d\n", totalSeminggu);
         System.out.printf("RATA-RATA HARIAN: Rp%,d\n", totalSeminggu / 7);
         System.out.println("--------------------------------------");
-        System.out.println("HARI TERBOROS   : " + hariTerboros + " (Rp" + String.format("%,d", max) + ")");
-        System.out.println("HARI TERHEMAT   : " + hariTerhemat + " (Rp" + String.format("%,d", min) + ")");
+        System.out.printf("HARI TERBOROS   : %s (Rp%,d)\n", namaHari[idxMax], max);
+        System.out.printf("HARI TERHEMAT   : %s (Rp%,d)\n", namaHari[idxMin], min);
         System.out.println("======================================");
 
         input.close();
