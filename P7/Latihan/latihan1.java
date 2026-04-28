@@ -1,4 +1,4 @@
-package P7;
+package P7.Latihan;
 import java.util.Scanner;
 
 public class latihan1 {

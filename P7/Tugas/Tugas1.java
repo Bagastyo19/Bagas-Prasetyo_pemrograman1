@@ -1,6 +1,6 @@
-package P7;
+package P7.Tugas;
 
-public class Tgs1 {
+public class Tugas1 {
     Public static void main(String[] args){
         Scanner input = new Scanner(System.in);
 
